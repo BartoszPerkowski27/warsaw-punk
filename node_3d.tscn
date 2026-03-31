@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvf7eddyumam0"]
+[gd_scene load_steps=10 format=3 uid="uid://dvf7eddyumam0"]
 
+[ext_resource type="Script" uid="uid://dpontb3kfa5li" path="res://enemy_unit.gd" id="1_a0tk4"]
 [ext_resource type="MeshLibrary" uid="uid://c6y88ok4qn2pm" path="res://tiles.meshlib" id="1_a202f"]
 [ext_resource type="Script" uid="uid://k2p5ce8q2kjs" path="res://player_unit.gd" id="1_noarx"]
+[ext_resource type="Script" uid="uid://bwovuawtxmk6u" path="res://grid_manager.gd" id="4_r3fl7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_noarx"]
 
@@ -17,9 +19,11 @@ albedo_color = Color(0, 1, 1, 1)
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Enemy_unit" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.255529, 1.8922501, 0)
-collision_layer = 3
+[node name="Enemy_unit" type="CharacterBody3D" parent="." groups=["enemies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.255529, 1.548554, 0)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_a0tk4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy_unit"]
 shape = SubResource("CapsuleShape3D_noarx")
@@ -30,9 +34,10 @@ shape = SubResource("CapsuleShape3D_noarx")
 mesh = SubResource("CapsuleMesh_a0tk4")
 surface_material_override/0 = SubResource("StandardMaterial3D_a202f")
 
-[node name="Player_unit" type="CharacterBody3D" parent="." groups=["units"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.146702, 0)
-collision_layer = 3
+[node name="Player_unit" type="CharacterBody3D" parent="." groups=["players"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.553947, 0)
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_noarx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player_unit"]
@@ -52,6 +57,8 @@ fov = 60.0
 mesh_library = ExtResource("1_a202f")
 physics_material = SubResource("PhysicsMaterial_jka67")
 cell_size = Vector3(1, 0.2, 1)
+collision_layer = 0
+collision_mask = 0
 data = {
 "cells": PackedInt32Array(0, 65535, 393216, 0, 65534, 393216, 0, 65533, 393216, 0, 65532, 393216, 1, 65532, 393216, 2, 65532, 393216, 3, 65532, 393216, 3, 65533, 393216, 3, 65534, 393216, 3, 65535, 393216, 2, 65535, 393216, 1, 65535, 393216, 1, 65534, 393216, 2, 65534, 393216, 2, 65533, 393216, 1, 65533, 393216, 3, 0, 393216, 3, 1, 393216, 3, 2, 393216, 3, 3, 393216, 2, 3, 393216, 2, 2, 393216, 2, 1, 393216, 2, 0, 393216, 1, 0, 393216, 1, 1, 393216, 1, 2, 393216, 1, 3, 393216, 0, 3, 393216, 0, 2, 393216, 0, 1, 393216, 0, 0, 393216, 65535, 65532, 393216, 65534, 65532, 393216, 65533, 65532, 393216, 65532, 65532, 393216, 65532, 65533, 393216, 65532, 65534, 393216, 65532, 65535, 393216, 65533, 65535, 393216, 65534, 65535, 393216, 65535, 65535, 393216, 65535, 65534, 393216, 65535, 65533, 393216, 65534, 65533, 393216, 65533, 65533, 393216, 65533, 65534, 393216, 65534, 65534, 393216, 65535, 0, 393216, 65534, 0, 393216, 65533, 0, 393216, 65532, 0, 393216, 65532, 1, 393216, 65532, 2, 393216, 65532, 3, 393216, 65533, 3, 393216, 65533, 2, 393216, 65533, 1, 393216, 65534, 1, 393216, 65534, 2, 393216, 65534, 3, 393216, 65535, 3, 393216, 65535, 2, 393216, 65535, 1, 393216)
 }
@@ -59,3 +66,6 @@ data = {
 [node name="TurnManager" type="Node" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GridManager" type="Node" parent="."]
+script = ExtResource("4_r3fl7")

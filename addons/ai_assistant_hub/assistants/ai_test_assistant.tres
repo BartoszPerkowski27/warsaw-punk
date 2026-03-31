@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="AIAssistantResource" load_steps=6 format=3 uid="uid://drwoqgaom1psy"]
+
+[ext_resource type="Resource" uid="uid://c0xq2vafep0gu" path="res://addons/ai_assistant_hub/llm_providers/ollama.tres" id="1_tkq8r"]
+[ext_resource type="Script" uid="uid://fbgea06k5cxg" path="res://addons/ai_assistant_hub/quick_prompts/ai_quick_prompt_resource.gd" id="2_12xux"]
+[ext_resource type="Script" uid="uid://bu5uj4j6enxsa" path="res://addons/ai_assistant_hub/assistants/ai_assistant_resource.gd" id="3_sfpj7"]
+
+[sub_resource type="Resource" id="Resource_tkq8r"]
+script = ExtResource("2_12xux")
+action_name = "Write"
+action_prompt = "Write new function specified in the comment inside the code.
+
+{CODE}"
+metadata/_custom_type_script = "uid://fbgea06k5cxg"
+
+[sub_resource type="Resource" id="Resource_12xux"]
+script = ExtResource("2_12xux")
+action_name = "Check"
+action_prompt = "Check the code and do code review.
+
+{CODE}"
+metadata/_custom_type_script = "uid://fbgea06k5cxg"
+
+[resource]
+script = ExtResource("3_sfpj7")
+type_name = "test assistant"
+ai_model = "SpeakLeash/bielik-11b-v3.0-instruct:Q4_K_M"
+llm_provider = ExtResource("1_tkq8r")
+ai_description = "You are a useful Godot AI assistant. Your main goal is to write working code that makes the game work.
+"
+quick_prompts = Array[ExtResource("2_12xux")]([SubResource("Resource_tkq8r"), SubResource("Resource_12xux")])
